@@ -1,0 +1,54 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new MaterialApp(
+      color: Colors.white,
+      home: DefaultTabController(
+        length: 4,
+        child: new Scaffold(
+          body: TabBarView(
+            children: [
+              new Container(
+                color: Colors.blue[50],
+              ),
+              new Container(
+                color: Colors.white,
+              ),
+              new Container(
+                color: Colors.blue[50],
+              ),
+              new Container(
+                color: Colors.white,
+              ),
+            ],
+          ),
+          bottomNavigationBar: new TabBar(
+            tabs: [
+              Tab(
+                icon: new Icon(Icons.home),
+              ),
+              Tab(
+                icon: new Icon(Icons.perm_identity),
+              ),
+              Tab(
+                icon: new Icon(Icons.notification_important),
+              ),
+              Tab(icon: new Icon(Icons.history),)
+            ],
+            labelColor: Colors.blue[700],
+            unselectedLabelColor: Colors.white,
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorPadding: EdgeInsets.all(5.0),
+            indicatorColor: Colors.red,
+          ),
+          backgroundColor: Colors.grey[800],
+        ),
+      ),
+    );
+  }
+}
