@@ -45,6 +45,18 @@ class MyApp extends StatelessWidget {
                 margin: const EdgeInsets.fromLTRB(0,50,0,0),
                 padding: EdgeInsets.fromLTRB(0,10,0,0),
                 color: Colors.white,
+                child:
+                  new Text(
+                    "Your Lifts",
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      foreground: Paint()
+                        ..style = PaintingStyle.stroke
+                        ..strokeWidth = 3
+                        ..color = Colors.blueGrey[900],
+                    ),
+                  ),
+                alignment: Alignment.topCenter,
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(0,50,0,0),
@@ -61,24 +73,24 @@ class MyApp extends StatelessWidget {
                       ..color = Colors.blueGrey[900],
                   ),
                 ),
-                /*
-                  Text(
-                  "Important Messages",
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    color: Colors.blueGrey[900],
-                  ),
-                ),
-
-
-                 */
-
                 alignment: Alignment.topCenter,
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(0,50,0,0),
                 padding: EdgeInsets.fromLTRB(0,10,0,0),
                 color: Colors.white,
+                child:
+                  new Text(
+                    "History",
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      foreground: Paint()
+                        ..style = PaintingStyle.stroke
+                        ..strokeWidth = 3
+                        ..color = Colors.blueGrey[900],
+                    ),
+                  ),
+                alignment: Alignment.topCenter,
               ),
             ],
           ),
