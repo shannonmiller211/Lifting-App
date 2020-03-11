@@ -1,0 +1,163 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+// boilerplate code
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter',
+      theme: ThemeData(
+        primaryColor: Colors.grey[800],
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Your Week',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Comic Sans')),
+        ),
+        body: MyWidget(),
+      ),
+    );
+  }
+}
+
+// widget class
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+// state class
+// We will replace this class in each of the examples below
+class _MyWidgetState extends State<MyWidget> {
+
+
+  void _clickDay1() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Day1(),
+      ),
+    );
+  }
+
+  // The State class must include this method, which builds the widget
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+    ButtonTheme(
+    minWidth: 420.0,
+        height: 100.0, //                         <--- Button
+          child: RaisedButton(
+            color: Colors.grey[200],
+          onPressed: () {
+            _clickDay1();
+          },
+            child: Text("Day 1",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Comic Sans',
+              fontSize: 30.0,
+            )
+            ),
+        ),
+    ),
+
+
+
+        ButtonTheme(
+          minWidth: 420.0,
+          height: 100.0, //                         <--- Button
+          child: RaisedButton(
+            color: Colors.grey[300],
+            onPressed: () {
+              _clickDay1();
+            },
+            child: Text("Day 2",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Comic Sans',
+                  fontSize: 30.0,
+                )
+            ),
+          ),
+        ),
+
+
+
+
+        ButtonTheme(
+          minWidth: 420.0,
+          height: 100.0, //                         <--- Button
+          child: RaisedButton(
+            color: Colors.grey[200],
+            onPressed: () {
+              _clickDay1();
+            },
+            child: Text("Day 3",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Comic Sans',
+                  fontSize: 30.0,
+                )
+            ),
+          ),
+        ),
+
+
+
+
+        ButtonTheme(
+          minWidth: 420.0,
+          height: 100.0, //                         <--- Button
+          child: RaisedButton(
+            color: Colors.grey[300],
+            onPressed: () {
+              _clickDay1();
+            },
+            child: Text("Day 4",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Comic Sans',
+                  fontSize: 30.0,
+                )
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+}
+
+class Day1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Day 1",
+            style: TextStyle(fontFamily: 'Comic Sans')),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Lift 1",
+            style: TextStyle(fontFamily: 'Comic Sans')),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Go back!',
+                  style: TextStyle(fontFamily: 'Comic Sans')),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
