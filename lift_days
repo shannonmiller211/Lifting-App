@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Your Week',
               style: TextStyle(
+                fontSize: 30.0,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Comic Sans')),
         ),
@@ -44,6 +45,33 @@ class _MyWidgetState extends State<MyWidget> {
     );
   }
 
+  void _clickDay2() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Day2(),
+      ),
+    );
+  }
+
+  void _clickDay3() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Day3(),
+      ),
+    );
+  }
+
+  void _clickDay4() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Day4(),
+      ),
+    );
+  }
+
   // The State class must include this method, which builds the widget
   @override
   Widget build(BuildContext context) {
@@ -59,7 +87,6 @@ class _MyWidgetState extends State<MyWidget> {
           },
             child: Text("Day 1",
             style: TextStyle(
-              fontWeight: FontWeight.bold,
               fontFamily: 'Comic Sans',
               fontSize: 30.0,
             )
@@ -75,11 +102,10 @@ class _MyWidgetState extends State<MyWidget> {
           child: RaisedButton(
             color: Colors.grey[300],
             onPressed: () {
-              _clickDay1();
+              _clickDay2();
             },
             child: Text("Day 2",
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
                   fontFamily: 'Comic Sans',
                   fontSize: 30.0,
                 )
@@ -100,7 +126,6 @@ class _MyWidgetState extends State<MyWidget> {
             },
             child: Text("Day 3",
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
                   fontFamily: 'Comic Sans',
                   fontSize: 30.0,
                 )
@@ -121,7 +146,6 @@ class _MyWidgetState extends State<MyWidget> {
             },
             child: Text("Day 4",
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
                   fontFamily: 'Comic Sans',
                   fontSize: 30.0,
                 )
@@ -140,14 +164,115 @@ class Day1 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Day 1",
-            style: TextStyle(fontFamily: 'Comic Sans')),
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30.0,
+                fontFamily: 'Comic Sans')),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("Lift 1",
-            style: TextStyle(fontFamily: 'Comic Sans')),
+                style: TextStyle(fontFamily: 'Comic Sans')),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Go back!',
+                  style: TextStyle(fontFamily: 'Comic Sans')),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class Day2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Day 2",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30.0,
+                fontFamily: 'Comic Sans')),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Lift 1",
+                style: TextStyle(fontFamily: 'Comic Sans')),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Go back!',
+                  style: TextStyle(fontFamily: 'Comic Sans')),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+class Day3 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Day 3",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30.0,
+                fontFamily: 'Comic Sans')),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Lift 1",
+                style: TextStyle(fontFamily: 'Comic Sans')),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Go back!',
+                  style: TextStyle(fontFamily: 'Comic Sans')),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+class Day4 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Day 4",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30.0,
+                fontFamily: 'Comic Sans')),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Lift 1",
+                style: TextStyle(fontFamily: 'Comic Sans')),
             RaisedButton(
               onPressed: () {
                 Navigator.pop(context);
