@@ -1,0 +1,15 @@
+body: SingleChildScrollView(
+child: Stack(
+    children: <Widget>[
+      new Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(...),
+      new Column(children: [
+        new Container(...),
+        new Container(...... ),
+        new Padding(
+          child: SizedBox(
+            child: RaisedButton(..),
+        ),
+        
+        
