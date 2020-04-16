@@ -15,13 +15,7 @@ class MyApp extends StatelessWidget {
       home: DefaultTabController(
         length: 4,
         child: Scaffold(
-          appBar: AppBar(
-            title: Text(".",
-                style: TextStyle(
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Comic Sans')),
-          ),
+          appBar: AppBar(),
           
           // name of tabs
           body: TabBarView(
