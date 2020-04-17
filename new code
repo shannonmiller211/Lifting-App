@@ -498,8 +498,14 @@ class PageItem1 extends StatelessWidget {
     return Column(
       children: <Widget>[  
               Material(
-                child: Text("Lift 1"),
+                child: Text("Lift 1",
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 18.0,
+                           fontWeight: FontWeight.bold
+                           )),
                 ),
+                       
         ]
     );
   }
