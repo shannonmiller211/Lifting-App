@@ -182,7 +182,7 @@ class _MyResourcesTab extends State<ResourcesTab> {
         body:  Center(
         child: ListView(
           children: <Widget>[
-            Card(
+            Card( color: Colors.grey[200],
               child: ListTile(
               leading: CircleAvatar(
               backgroundColor: Colors.blueGrey[700],
@@ -204,7 +204,7 @@ class _MyResourcesTab extends State<ResourcesTab> {
       ),
     ), 
             // initials icon
-            Card(
+            Card( color: Colors.grey[300],
               child: ListTile(
               leading: CircleAvatar(
                backgroundColor: Colors.blueGrey[800],
@@ -226,7 +226,7 @@ class _MyResourcesTab extends State<ResourcesTab> {
       ),
     ), 
             // camera icon
-            Card(
+            Card( color: Colors.grey[200],
               child: ListTile(
               leading: Icon(Icons.camera_alt,
                            color: Colors.blueGrey[900],
