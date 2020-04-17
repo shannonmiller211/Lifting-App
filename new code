@@ -413,11 +413,11 @@ class TileItem1 extends StatelessWidget {
                     width: double.infinity,
                     child: Text("Week $week",   
                                textAlign: TextAlign.center,
-                                style: TextStyle(
+                               style: TextStyle(
                                fontFamily: 'Comic Sans',
-                                  foreground: Paint()
-                              ..color = Colors.white,
-                                fontSize: 30.0),    
+                               foreground: Paint()
+                               ..color = Colors.white,
+                               fontSize: 30.0),    
                   ),
                 )
                   ) 
@@ -495,18 +495,143 @@ class PageItem1 extends StatelessWidget {
  const PageItem1({Key key, this.week}) : super(key: key);
 
   _day1w1(){
-    return Column(
-      children: <Widget>[  
-              Material(
-                child: Text("Lift 1",
+    return Center(
+      child: ListView(
+        children: <Widget>[ 
+          // lift 1
+          Card(color: Colors.grey[200],
+              child: ListTile(
+              title: Text("Back Squat",
                            style: TextStyle(
                            fontFamily: 'Comic Sans',
-                           fontSize: 18.0,
+                           fontSize: 20.0,
                            fontWeight: FontWeight.bold
                            )),
-                ),
-                       
-        ]
+               subtitle: Text('5 x 4',
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontStyle: FontStyle.italic)),
+                  ),
+                ), 
+          Material(   
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "  Enter Weight"
+                  )
+              ),
+                )
+                  ),  
+          
+          // lift 2
+          Card(color: Colors.grey[300],
+              child: ListTile(
+              title: Text("Overhead Press/Jerk",
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontWeight: FontWeight.bold
+                           )),
+               subtitle: Text('4 x 4',
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontStyle: FontStyle.italic)),
+                  ),
+                ), 
+          Material(   
+                  color: Colors.grey[300],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "  Enter Weight"
+                  )
+              ),
+                )
+                  ),  
+          
+          // lift 3
+          Card(color: Colors.grey[200],
+              child: ListTile(
+              title: Text("Clean Pull from Athletic Position",
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontWeight: FontWeight.bold
+                           )),
+               subtitle: Text('4 x 4',
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontStyle: FontStyle.italic)),
+                  ),
+                ), 
+          Material(   
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "  Enter Weight"
+                  )
+              ),
+                )
+                  ),  
+          
+          // lift 4
+          Card(color: Colors.grey[300],
+              child: ListTile(
+              title: Text("Choice Pulls",
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontWeight: FontWeight.bold
+                           )),
+               subtitle: Text('5 sets',
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontStyle: FontStyle.italic)),
+                  ),
+                ), 
+          Material(   
+                  color: Colors.grey[300],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "  Enter Weight"
+                  )
+              ),
+                )
+                  ), 
+          
+          // lift 5
+          Card(color: Colors.grey[200],
+              child: ListTile(
+              title: Text("Planks",
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontWeight: FontWeight.bold
+                           )),
+               subtitle: Text('4 sets',
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontStyle: FontStyle.italic)),
+                  ),
+                ),  
+          ]
+        )
     );
   }
   
@@ -538,9 +663,18 @@ class PageItem1 extends StatelessWidget {
           child: Column(
             children: <Widget>[  
               Material(
+                color: Colors.blueGrey[900],
                 child: ListTile(
-                  title: Text("Week $week"),
-                  subtitle: Text("Workout history"),
+                  title: Text("Week $week",
+                           style: TextStyle(
+                           fontSize: 18.0,
+                           foreground: Paint()
+                            ..color = Colors.white)
+                             ),
+                  subtitle: Text("Workout history",
+                           style: TextStyle(
+                           foreground: Paint()
+                           ..color = Colors.white)),
                 ),
               ),
               Expanded(
