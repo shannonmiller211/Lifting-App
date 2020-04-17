@@ -665,13 +665,13 @@ class PageItem1 extends StatelessWidget {
               Material(
                 color: Colors.blueGrey[900],
                 child: ListTile(
-                  title: Text("Week $week",
+                  title: Text("Day $week",
                            style: TextStyle(
                            fontSize: 18.0,
                            foreground: Paint()
                             ..color = Colors.white)
                              ),
-                  subtitle: Text("Workout history",
+                  subtitle: Text("Exercises",
                            style: TextStyle(
                            foreground: Paint()
                            ..color = Colors.white)),
