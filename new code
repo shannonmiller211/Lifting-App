@@ -467,7 +467,7 @@ class TileItem1 extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return new PageItem1(week: week);
+                          return new PageItem1(week: week, count: count);
                         },
                         fullscreenDialog: true,
                       ),
@@ -491,8 +491,9 @@ class TileItem1 extends StatelessWidget {
 // page when clicked - home tab
 class PageItem1 extends StatelessWidget {
   final int week;
+  final int count;
 
- const PageItem1({Key key, this.week}) : super(key: key);
+ const PageItem1({Key key, this.week, this.count}) : super(key: key);
 
   _day1w1(){
     return Center(
@@ -665,7 +666,7 @@ class PageItem1 extends StatelessWidget {
               Material(
                 color: Colors.blueGrey[900],
                 child: ListTile(
-                  title: Text("Day $week",
+                  title: Text("Day $count",
                            style: TextStyle(
                            fontSize: 18.0,
                            foreground: Paint()
