@@ -1294,187 +1294,90 @@ class HistoryTab extends StatefulWidget {
 class _MyHistoryTab extends State<HistoryTab> {
 
 
-  void _clickWeek1() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Week1(),
-      ),
-    );
-  }
-
-  void _clickWeek2() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Week2(),
-      ),
-    );
-  }
-
 
 
   // The State class must include this method, which builds the widget
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          width: double.infinity,
-          child: Container(
-            color: Colors.green[800],
-            child: Text("Your Workout History",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  foreground: Paint()
-                    ..color = Colors.white,
-                  fontFamily: 'Comic Sans',
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.green[800],
+          title: Text('Your Workout History',
+            style: TextStyle(
+                fontFamily: 'Comic Sans',
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold),),
+        ),
+        body:
+        ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return TileItem(num: index + 1);
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class TileItem extends StatelessWidget {
+  final int num;
+
+  const TileItem({Key key, this.num}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: "card$num",
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(8.0),
+          ),
+        ),
+        child: Stack(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Material(
+                    color: (num % 2 == 0) ? Colors.grey[200] : Colors.grey[300],
+                    child: ListTile(
+
+                      title: Text("Week $num",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: 'Comic Sans',
+                            fontSize: 30.0),
+
+                      ),
+                    )
+                )
+              ],
+            ),
+            Positioned(
+              left: 0.0,
+              top: 0.0,
+              bottom: 0.0,
+              right: 0.0,
+              child: Material(
+                type: MaterialType.transparency,
+                child: InkWell(
+                  onTap: () async {
+                    await Future.delayed(Duration(milliseconds: 200));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return new PageItem(num: num);
+                        },
+                        fullscreenDialog: true,
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-        ),
-
-        ButtonTheme(
-          minWidth: 420.0,
-          height: 100.0, //                         <--- Button
-          child: RaisedButton(
-            color: Colors.grey[200],
-            onPressed: () {
-              _clickWeek1();
-            },
-            child: Text("Week 1",
-                style: TextStyle(
-                  fontFamily: 'Comic Sans',
-                  fontSize: 30.0,
-                )
-            ),
-          ),
-        ),
-
-
-
-        ButtonTheme(
-          minWidth: 420.0,
-          height: 100.0, //                         <--- Button
-          child: RaisedButton(
-            color: Colors.grey[300],
-            onPressed: () {
-              _clickWeek2();
-            },
-            child: Text("Week 2",
-                style: TextStyle(
-                  fontFamily: 'Comic Sans',
-                  fontSize: 30.0,
-                )
-            ),
-          ),
-        ),
-
-
-        ButtonTheme(
-          minWidth: 420.0,
-          height: 100.0, //                         <--- Button
-          child: RaisedButton(
-            color: Colors.grey[200],
-            onPressed: () {
-              _clickWeek1();
-            },
-            child: Text("Week 3",
-                style: TextStyle(
-                  fontFamily: 'Comic Sans',
-                  fontSize: 30.0,
-                )
-            ),
-          ),
-        ),
-
-
-
-        ButtonTheme(
-          minWidth: 420.0,
-          height: 100.0, //                         <--- Button
-          child: RaisedButton(
-            color: Colors.grey[300],
-            onPressed: () {
-              _clickWeek2();
-            },
-            child: Text("Week 4",
-                style: TextStyle(
-                  fontFamily: 'Comic Sans',
-                  fontSize: 30.0,
-                )
-            ),
-          ),
-        ),
-
-        ButtonTheme(
-          minWidth: 420.0,
-          height: 100.0, //                         <--- Button
-          child: RaisedButton(
-            color: Colors.grey[200],
-            onPressed: () {
-              _clickWeek1();
-            },
-            child: Text("Week 5",
-                style: TextStyle(
-                  fontFamily: 'Comic Sans',
-                  fontSize: 30.0,
-                )
-            ),
-          ),
-        ),
-
-
-
-        //ButtonTheme(
-          //minWidth: 420.0,
-          //height: 100.0, //                         <--- Button
-          //child: RaisedButton(
-           // color: Colors.grey[300],
-            //onPressed: () {
-              //_clickWeek2();
-            //},
-            //child: Text("Week 6",
-                //style: TextStyle(
-                  //fontFamily: 'Comic Sans',
-                  //fontSize: 30.0,
-                //)
-            //),
-          //),
-        //),
-      ],
-    );
-  }
-
-}
-
-class Week1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Week 1",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30.0,
-                fontFamily: 'Comic Sans')),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Lift 1",
-                style: TextStyle(fontFamily: 'Comic Sans')),
-
-            RaisedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Go back!',
-                  style: TextStyle(fontFamily: 'Comic Sans')),
-            ),
           ],
         ),
       ),
@@ -1482,37 +1385,68 @@ class Week1 extends StatelessWidget {
   }
 }
 
+class PageItem extends StatelessWidget {
+  final int num;
 
-class Week2 extends StatelessWidget {
+  const PageItem({Key key, this.num}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Week 2",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30.0,
-                fontFamily: 'Comic Sans')),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Lift 1",
-                style: TextStyle(fontFamily: 'Comic Sans')),
-            RaisedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Go back!',
-                  style: TextStyle(fontFamily: 'Comic Sans')),
-            ),
-          ],
+    AppBar appBar = new AppBar(
+      primary: false,
+      leading: IconTheme(data: IconThemeData(color: Colors.white), child: CloseButton()),
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.black.withOpacity(0.4),
+              Colors.black.withOpacity(0.1),
+            ],
+          ),
         ),
       ),
+      backgroundColor: Colors.transparent,
     );
+    final MediaQueryData mediaQuery = MediaQuery.of(context);
+
+    return Stack(children: <Widget>[
+      Hero(
+        tag: "card$num",
+        child: Material(
+          child: Column(
+            children: <Widget>[
+
+
+              Material(
+                child: ListTile(
+                  title: Text("Week $num"),
+                  subtitle: Text("Workout history for week #$num"),
+                ),
+              ),
+              Expanded(
+                child: Center(child: Text("Some more content goes here!")),
+              )
+            ],
+          ),
+        ),
+      ),
+      Column(
+        children: <Widget>[
+          Container(
+            height: mediaQuery.padding.top,
+          ),
+          ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: appBar.preferredSize.height),
+            child: appBar,
+          )
+        ],
+      ),
+    ]);
   }
 }
+
 
 // --------------------------------
 
@@ -1523,25 +1457,6 @@ class MessagesTab extends StatefulWidget {
 }
 
 class _MyMessagesTab extends State<MessagesTab> {
-
-
-  void _clickWeek1() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Week1(),
-      ),
-    );
-  }
-
-  void _clickWeek2() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Week2(),
-      ),
-    );
-  }
 
 
 
