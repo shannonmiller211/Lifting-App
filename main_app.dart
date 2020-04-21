@@ -430,48 +430,29 @@ class MessagesTab extends StatefulWidget {
 }
 
 class _MyMessagesTab extends State<MessagesTab> {
-
-
-
-  // The State class must include this method, which builds the widget
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          width: double.infinity,
-          child: Container(
-            color: Colors.green[800],
-            child: Text("Your Notifications",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  foreground: Paint()
-                    ..color = Colors.white,
+        return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.green[800],
+          title: Text('Your Notifications',
+                  style: TextStyle(
                   fontFamily: 'Comic Sans',
                   fontSize: 30.0,
-                  fontWeight: FontWeight.bold
-              ),
-            ),
-          ),
+                  fontWeight: FontWeight.bold),),
         ),
-
-        SizedBox(
-          child: Container(
-            width: MediaQuery.of(context).size.width * 1,
-            height: MediaQuery.of(context).size.width * 1.1,
-            color: Colors.grey[200],
-            child: Text("You currently have no messages.",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontFamily: 'Comic Sans',
-                  fontSize: 20.0
-              ),
-            ),
-          ),
-        ),
-
-
-      ],
+        body:  Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // messages go here
+            Text("You currently have no messages.",
+                style: TextStyle(fontFamily: 'Comic Sans', fontSize: 30.0)),
+            ]
+      ),
+    )
+    )
     );
   }
 
@@ -488,125 +469,86 @@ class _MyResourcesTab extends State<ResourcesTab> {
 
   // The State class must include this method, which builds the widget
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          width: double.infinity,
-          child: Container(
-            color: Colors.green[800],
-            child: Text("Resources",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  foreground: Paint()
-                    ..color = Colors.white,
+   Widget build(BuildContext context) {
+     return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.green[800],
+          title: Text('Resources',
+                  style: TextStyle(
                   fontFamily: 'Comic Sans',
                   fontSize: 30.0,
-                  fontWeight: FontWeight.bold
-              ),
-            ),
-          ),
+                  fontWeight: FontWeight.bold),),
         ),
-
-        SizedBox(
-          width: double.infinity,
-          child: Container(
-            color: Colors.grey[200],
-            child: Text("Coach Veith",
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  foreground: Paint()
-                    ..color = Colors.black,
+        
+        // initials icon
+        body:  Center(
+        child: ListView(
+          children: <Widget>[
+            Card( color: Colors.grey[200],
+              child: ListTile(
+              leading: CircleAvatar(
+              backgroundColor: Colors.blueGrey[700],
+                child: Text('SV',
+                            style: TextStyle(
+                            foreground: Paint()
+                            ..color = Colors.white),
+                                 ),
+              ),
+                // name of resource
+              title: Text('Coach Veith',
+                  style: TextStyle(
                   fontFamily: 'Comic Sans',
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: double.infinity,
-          child: Container(
-            color: Colors.grey[200],
-            child: Text("sveith@drew.edu | 973-432-5039",
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  foreground: Paint()
-                    ..color = Colors.black,
+                  fontSize: 30.0,)),
+              subtitle: Text('sveith@drew.edu | 973-432-5039',
+                  style: TextStyle(
                   fontFamily: 'Comic Sans',
-                  fontSize: 25.0,
-                  fontStyle: FontStyle.italic
+                  fontSize: 20.0,)),
+      ),
+    ), 
+            // initials icon
+            Card( color: Colors.grey[300],
+              child: ListTile(
+              leading: CircleAvatar(
+               backgroundColor: Colors.blueGrey[800],
+               child: Text('CR',
+                            style: TextStyle(
+                            foreground: Paint()
+                            ..color = Colors.white),
+                                 ), 
               ),
-            ),
-          ),
-        ),
-
-        SizedBox(
-          width: double.infinity,
-          child: Container(
-            color: Colors.grey[300],
-            child: Text("Chris Ryan",
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  foreground: Paint()
-                    ..color = Colors.black,
+                // name of resource
+              title: Text('Chris Ryan',
+                  style: TextStyle(
                   fontFamily: 'Comic Sans',
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: double.infinity,
-          child: Container(
-            color: Colors.grey[300],
-            child: Text("cryan@drew.edu",
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  foreground: Paint()
-                    ..color = Colors.black,
+                  fontSize: 30.0,)),
+              subtitle: Text('cryan@drew.edu',
+                  style: TextStyle(
                   fontFamily: 'Comic Sans',
-                  fontSize: 25.0,
-                  fontStyle: FontStyle.italic
-              ),
-            ),
-          ),
-        ),
-
-        SizedBox(
-          width: double.infinity,
-          child: Container(
-            color: Colors.grey[200],
-            child: Text("Instagram",
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  foreground: Paint()
-                    ..color = Colors.black,
+                  fontSize: 20.0,)),
+      ),
+    ), 
+            // camera icon
+            Card( color: Colors.grey[200],
+              child: ListTile(
+              leading: Icon(Icons.camera_alt,
+                           color: Colors.blueGrey[900],
+                           size: 42.0),
+              // instagram resource
+              title: Text('Instagram',
+                  style: TextStyle(
                   fontFamily: 'Comic Sans',
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: double.infinity,
-          child: Container(
-            color: Colors.grey[200],
-            child: Text("@drew_u_strength",
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  foreground: Paint()
-                    ..color = Colors.black,
+                  fontSize: 30.0,)),
+              subtitle: Text('@drew_u_strength',
+                  style: TextStyle(
                   fontFamily: 'Comic Sans',
-                  fontSize: 25.0,
-                  fontStyle: FontStyle.italic
-              ),
-            ),
-          ),
+                  fontSize: 20.0,)),
+      ),
+    ),           
+            ]
         ),
-      ],
+    )
+    )
     );
   }
 
