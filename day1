@@ -1,0 +1,140 @@
+  _day1w1(){
+    return Center(
+      child: ListView(
+        children: <Widget>[ 
+          // lift 1
+          Card(color: Colors.grey[200],
+              child: ListTile(
+              title: Text("Back Squat",
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontWeight: FontWeight.bold
+                           )),
+               subtitle: Text('5 x 4',
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontStyle: FontStyle.italic)),
+                  ),
+                ), 
+          Material(   
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "  Enter Weight"
+                  )
+              ),
+                )
+                  ),  
+          
+          // lift 2
+          Card(color: Colors.grey[300],
+              child: ListTile(
+              title: Text("Overhead Press/Jerk",
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontWeight: FontWeight.bold
+                           )),
+               subtitle: Text('4 x 4',
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontStyle: FontStyle.italic)),
+                  ),
+                ), 
+          Material(   
+                  color: Colors.grey[300],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "  Enter Weight"
+                  )
+              ),
+                )
+                  ),  
+          
+          // lift 3
+          Card(color: Colors.grey[200],
+              child: ListTile(
+              title: Text("Clean Pull from Athletic Position",
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontWeight: FontWeight.bold
+                           )),
+               subtitle: Text('4 x 4',
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontStyle: FontStyle.italic)),
+                  ),
+                ), 
+          Material(   
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "  Enter Weight"
+                  )
+              ),
+                )
+                  ),  
+          
+          // lift 4
+          Card(color: Colors.grey[300],
+              child: ListTile(
+              title: Text("Choice Pulls",
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontWeight: FontWeight.bold
+                           )),
+               subtitle: Text('5 sets',
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontStyle: FontStyle.italic)),
+                  ),
+                ), 
+          Material(   
+                  color: Colors.grey[300],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "  Enter Weight"
+                  )
+              ),
+                )
+                  ), 
+          
+          // lift 5
+          Card(color: Colors.grey[200],
+              child: ListTile(
+              title: Text("Planks",
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontWeight: FontWeight.bold
+                           )),
+               subtitle: Text('4 sets',
+                           style: TextStyle(
+                           fontFamily: 'Comic Sans',
+                           fontSize: 20.0,
+                           fontStyle: FontStyle.italic)),
+                  ),
+                ),  
+          ]
+        )
+    );
+  }
