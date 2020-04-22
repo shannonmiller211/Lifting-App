@@ -77,12 +77,12 @@ class _HomeTab extends State<HomeTab> {
                   fontWeight: FontWeight.bold),),
         ),
         body: 
-        // number of buttons
+        // number of week buttons
         ListView.builder(
           itemCount: 10,
           itemBuilder: (context, index) {
             return 
-              TileItem1(week: index + 1); 
+              HomeWeeks(week: index + 1); 
           },
         ),
       ),
@@ -111,11 +111,11 @@ class _HistoryTab extends State<HistoryTab> {
                   fontWeight: FontWeight.bold),),
         ),
         body: 
-        // number of buttons
+        // number of week buttons
         ListView.builder(
-          itemCount: 11,
+          itemCount: 10,
           itemBuilder: (context, index) {
-            return TileItem(week: index + 1);
+            return HistoryWeeks(week: index + 1);
           },
         ),
       ),
@@ -251,10 +251,10 @@ class _MyResourcesTab extends State<ResourcesTab> {
 }
 
 // creates history tab buttons
-class TileItem extends StatelessWidget {
+class HistoryWeeks extends StatelessWidget {
   final int week;
 
-  const TileItem({Key key, this.week}) : super(key: key);
+  const HistoryWeeks({Key key, this.week}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -273,7 +273,7 @@ class TileItem extends StatelessWidget {
                 Material(
                   color: (week % 2 == 0) ? Colors.grey[200] : Colors.grey[300],
                   child: ListTile(
-                    // title of buttons
+                    // title of week buttons
                     title: Text("Week $week",
                                textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -300,7 +300,8 @@ class TileItem extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return new PageItem(week: week);
+                          // clicks to day buttons
+                          return new HistoryDays(week: week);
                         },
                         fullscreenDialog: true,
                       ),
@@ -316,11 +317,11 @@ class TileItem extends StatelessWidget {
   }
 }
 
-// page when clicked - history tab
-class PageItem extends StatelessWidget {
+// creates day buttons - history tab
+class HistoryDays extends StatelessWidget {
   final int week;
 
- const PageItem({Key key, this.week}) : super(key: key);
+ const HistoryDays({Key key, this.week}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     AppBar appBar = new AppBar(
@@ -348,8 +349,6 @@ class PageItem extends StatelessWidget {
         child: Material(
           child: Column(
             children: <Widget>[
-              
-            
               Material(
                 child: ListTile(
                   title: Text("Week $week"),
@@ -382,10 +381,10 @@ class PageItem extends StatelessWidget {
 
 
 // create home tab buttons
-class TileItem1 extends StatelessWidget {
+class HomeWeeks extends StatelessWidget {
   final int week;
   
- const TileItem1({Key key, this.week}) : super(key: key);
+ const HomeWeeks({Key key, this.week}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -404,7 +403,7 @@ class TileItem1 extends StatelessWidget {
             Material(
                   color: (week % 2 == 0) ? Colors.grey[200] : Colors.grey[300],
                   child: ListTile(  
-                    // title of buttons
+                    // week buttons - home page
                     title: Text("Week $week",
                                textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -430,7 +429,7 @@ class TileItem1 extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          //return new PageItem1(week: week);
+                          // navigates to days - home tab
                           return new ListOfDays(week: week);
                         },
                         fullscreenDialog: true,
@@ -473,8 +472,8 @@ class ListOfDays extends StatelessWidget {
         ListView.builder(
           itemCount: 5,
           itemBuilder: (context, index) {
-            return 
-              TileItem2(week: index + 1); 
+            // navigates to day buttons - home tab
+            return HomeDays(week: index + 1); 
           },
         ),
       ),
@@ -482,10 +481,11 @@ class ListOfDays extends StatelessWidget {
   }
 }
 
-class TileItem2 extends StatelessWidget {
+// creates day buttons - home tab
+class HomeDays extends StatelessWidget {
   final int week;
   
- const TileItem2({Key key, this.week}) : super(key: key);
+ const HomeDays({Key key, this.week}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -501,8 +501,11 @@ class TileItem2 extends StatelessWidget {
           children: <Widget>[
             Column(
               children: <Widget>[
+                // if this is true 
                 (week <5) ?
+                // then do this
             Material(
+              // colors every other light/darker grey
                   color: (week % 2 == 0) ? Colors.grey[200] : Colors.grey[300],
                   child: ListTile(  
                     // title of buttons
@@ -512,10 +515,13 @@ class TileItem2 extends StatelessWidget {
                                fontFamily: 'Comic Sans',
                   fontSize: 30.0))
                 )
-                  ) :
+                  ) // if not, do this
+                :
                 Material(
                   color:  Colors.blue[900],
-                  child: ListTile(  
+                  child: RaisedButton(  
+                    onPressed: () {},
+                    /*
                     // title of buttons
                     title: Text("Go Back",
                                textAlign: TextAlign.center,
@@ -524,6 +530,7 @@ class TileItem2 extends StatelessWidget {
                                fontSize: 30.0,
                                 foreground: Paint()
                             ..color = Colors.white))
+                    */
                 )
                   ),
               ],
@@ -545,8 +552,7 @@ class TileItem2 extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          //return new PageItem1(week: week);
-                          return new PageItem1(week: week);
+                          return new ExercisePage(week: week);
                         },
                         fullscreenDialog: true,
                       ),
@@ -563,7 +569,7 @@ class TileItem2 extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TileItem1(),
+                        builder: (context) => HomeWeeks(),
                         fullscreenDialog: true,
                       ),
                     );
@@ -582,11 +588,12 @@ class TileItem2 extends StatelessWidget {
 }
 
 // page when clicked - home tab
-class PageItem1 extends StatelessWidget {
+class ExercisePage extends StatelessWidget {
   final int week;
 
- const PageItem1({Key key, this.week}) : super(key: key);
+ const ExercisePage({Key key, this.week}) : super(key: key);
 
+// day 1 week 1 workout
   _day1w1(){
     return Center(
       child: ListView(
@@ -758,6 +765,7 @@ class PageItem1 extends StatelessWidget {
               Material(
                 color: Colors.blueGrey[900],
                 child: ListTile(
+                  // title on top of page
                   title: Text("Day $week",
                            style: TextStyle(
                            fontSize: 18.0,
@@ -770,8 +778,8 @@ class PageItem1 extends StatelessWidget {
                            ..color = Colors.white)),
                 ),
               ),
+              // which workout is displayed
               Expanded(
-                // workouts go here
                 child: Center(child: _day1w1()),
               )
             ],
