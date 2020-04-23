@@ -574,7 +574,7 @@ class HomeDays extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return new ExercisePage(week: day);
+                            return new ExercisePage(day: day);
                           },
                           fullscreenDialog: true,
                         ),
@@ -611,9 +611,9 @@ class HomeDays extends StatelessWidget {
 
 // page when clicked - home tab
 class ExercisePage extends StatelessWidget {
-  final int week;
+  final int day;
 
-  const ExercisePage({Key key, this.week}) : super(key: key);
+  const ExercisePage({Key key, this.day}) : super(key: key);
 
 
 // day 1 week 1 workout
@@ -1145,7 +1145,7 @@ class ExercisePage extends StatelessWidget {
 
     return Stack(children: <Widget>[
       Hero(
-        tag: "card$week",
+        tag: "card$day",
         child: Material(
           child: Column(
             children: <Widget>[
@@ -1153,7 +1153,7 @@ class ExercisePage extends StatelessWidget {
                 color: Colors.blueGrey[900],
                 child: ListTile(
                   // title on top of page
-                  title: Text("Day $week",
+                  title: Text("Day $day",
                       style: TextStyle(
                           fontSize: 18.0,
                           foreground: Paint()
@@ -1166,17 +1166,17 @@ class ExercisePage extends StatelessWidget {
                 ),
               ),
               // which workout is displayed
-              if (week ==1)
+              if (day ==1)
                 Expanded(
                   child: Center(
                       child: _day1w1()),
-                ), if (week ==2) Expanded(
+                ), if (day ==2) Expanded(
                 child: Center(
                     child: _day2w1()),
-              ), if (week ==3) Expanded(
+              ), if (day ==3) Expanded(
                 child: Center(
                     child: _day3w1()),
-              ),  if (week ==4) Expanded(
+              ),  if (day ==4) Expanded(
                 child: Center(
                     child: _day4w1()),
               ),
