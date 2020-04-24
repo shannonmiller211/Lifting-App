@@ -115,7 +115,7 @@ class _MyMessagesTab extends State<MessagesTab> {
                   children: [
                     // messages go here
                     Text("You currently have no messages.",
-                        style: TextStyle(fontFamily: 'Comic Sans', fontSize: 30.0)),
+                        style: TextStyle(fontFamily: 'Comic Sans', fontSize: 20.0)),
                   ]
               ),
             )
