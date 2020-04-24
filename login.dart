@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/main.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'main_app.dart';
 
 void main() => runApp(MyApp());
@@ -80,9 +80,9 @@ class _MyLoginPageState extends State<MyLoginPage> {
                 child: MaterialButton(
                   onPressed: () async {
                     setState(() {
-                      showProgress = true;
+                      showProgress = false;
                     });
-                    try {
+                     {
                       final newUser = await _auth.signInWithEmailAndPassword(
                           email: email, password: password);
                       print(newUser.toString());
@@ -90,21 +90,26 @@ class _MyLoginPageState extends State<MyLoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Hi()),
+                              builder: (context) => WholeApp()),
                         );
-                        //Fluttertoast.showToast(
-                           // msg: "Login Successfull",
-                           // toastLength: Toast.LENGTH_SHORT,
-                            //gravity: ToastGravity.CENTER,
-                            //timeInSecForIosWeb: 1,
-                            //backgroundColor: Colors.blueAccent,
-                            //textColor: Colors.white,
-                           // fontSize: 16.0);
-                        setState(() {
-                          showProgress = false;
-                        });
+
                       }
-                    } catch (e) {}
+                      else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyHomePage()
+                            )
+                        );
+                      }
+                      setState(() {
+                        showProgress = false;
+                      });
+                    }
+
+
+
+
                   },
                   minWidth: 200.0,
                   height: 45.0,
