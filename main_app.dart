@@ -1,14 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/WeekDaysPackage/Week10Days.dart';
-import 'package:flutter_app/WeekDaysPackage/Week1Days.dart';
-import 'package:flutter_app/WeekDaysPackage/Week2Days.dart';
-import 'package:flutter_app/WeekDaysPackage/Week3Days.dart';
-import 'package:flutter_app/WeekDaysPackage/Week4Days.dart';
-import 'package:flutter_app/WeekDaysPackage/Week5Days.dart';
-import 'package:flutter_app/WeekDaysPackage/Week6Days.dart';
-import 'package:flutter_app/WeekDaysPackage/Week7Days.dart';
-import 'package:flutter_app/WeekDaysPackage/Week8Days.dart';
-import 'package:flutter_app/WeekDaysPackage/Week9Days.dart';
+
 
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
@@ -20,13 +11,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Hi(),
+      home: WholeApp(),
     );
   }
 
 //hi() {}
 }
-class Hi extends StatelessWidget {
+class WholeApp extends StatelessWidget {
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -37,7 +29,7 @@ class Hi extends StatelessWidget {
 
         // number of tabs
         home: DefaultTabController(
-          length: 4,
+          length: 3,
           child: Scaffold(
             appBar: AppBar(),
 
@@ -45,7 +37,6 @@ class Hi extends StatelessWidget {
             body: TabBarView(
                 children: <Widget>[
                   HomeTab(),
-                  HistoryTab(),
                   MessagesTab(),
                   ResourcesTab()
                 ]
@@ -58,9 +49,7 @@ class Hi extends StatelessWidget {
                 Tab(
                   icon: Icon(Icons.home),
                 ),
-                Tab(
-                  icon: Icon(Icons.perm_identity),
-                ),
+
                 Tab(
                   icon: Icon(Icons.notifications),
                 ),
@@ -115,37 +104,6 @@ class _HomeTab extends State<HomeTab> {
 }
 
 
-// history tab
-class HistoryTab extends StatefulWidget {
-  @override
-  _HistoryTab createState() => _HistoryTab();
-}
-
-class _HistoryTab extends State<HistoryTab> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.green[800],
-          title: Text('Your Workout History',
-            style: TextStyle(
-                fontFamily: 'Comic Sans',
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold),),
-        ),
-        body:
-        // number of week buttons
-        ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return HistoryWeeks(week: index + 1);
-          },
-        ),
-      ),
-    );
-  }
-}
 
 
 // messages tab
@@ -274,133 +232,6 @@ class _MyResourcesTab extends State<ResourcesTab> {
   }
 }
 
-// creates history tab buttons
-class HistoryWeeks extends StatelessWidget {
-  final int week;
-
-  const HistoryWeeks({Key key, this.week}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Hero(
-      tag: "card$week",
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
-          ),
-        ),
-        child: Stack(
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Material(
-                    color: (week % 2 == 0) ? Colors.grey[200] : Colors.grey[300],
-                    child: ListTile(
-                      // title of week buttons
-                      title: Text("Week $week",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Comic Sans',
-                            fontSize: 30.0),
-
-                      ),
-                    )
-                )
-              ],
-            ),
-            Positioned(
-              left: 0.0,
-              top: 0.0,
-              bottom: 0.0,
-              right: 0.0,
-              // makes the button clickable
-              child: Material(
-                type: MaterialType.transparency,
-                child: InkWell(
-                  onTap: () async {
-                    await Future.delayed(Duration(milliseconds: 200));
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          // clicks to day buttons
-                          return new HistoryDays(week: week);
-                        },
-                        fullscreenDialog: true,
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// creates day buttons - history tab
-class HistoryDays extends StatelessWidget {
-  final int week;
-
-  const HistoryDays({Key key, this.week}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    AppBar appBar = new AppBar(
-      primary: false,
-      leading: IconTheme(data: IconThemeData(color: Colors.white), child: CloseButton()),
-      flexibleSpace: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.black.withOpacity(0.4),
-              Colors.black.withOpacity(0.1),
-            ],
-          ),
-        ),
-      ),
-      backgroundColor: Colors.transparent,
-    );
-    final MediaQueryData mediaQuery = MediaQuery.of(context);
-
-    return Stack(children: <Widget>[
-      Hero(
-        tag: "card$week",
-        child: Material(
-          child: Column(
-            children: <Widget>[
-              Material(
-                child: ListTile(
-                  title: Text("Week $week"),
-                  subtitle: Text("Workout history"),
-                ),
-              ),
-              Expanded(
-                // workout history goes here
-                child: Center(child: Text('hello')),
-              )
-            ],
-          ),
-        ),
-      ),
-      Column(
-        children: <Widget>[
-          Container(
-            height: mediaQuery.padding.top,
-          ),
-          ConstrainedBox(
-            constraints: BoxConstraints(maxHeight: appBar.preferredSize.height),
-            child: appBar,
-          )
-        ],
-      ),
-    ]);
-  }
-}
 
 
 
@@ -454,7 +285,7 @@ class HomeWeeks extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (context) {
                             // navigates to days - home tab
-                            return new ListOfDays(day: week);
+                            return new ListOfDays(week: week);
                           },
                           fullscreenDialog: true,
                         ),
@@ -462,10 +293,6 @@ class HomeWeeks extends StatelessWidget {
                     },
                   ),
                 )
-
-
-
-
             ),
           ],
         ),
@@ -477,8 +304,9 @@ class HomeWeeks extends StatelessWidget {
 // creates list of days for each week
 class ListOfDays extends StatelessWidget {
   final int day;
+  final int week;
 
-  const ListOfDays({Key key, this.day}) : super(key: key);
+  const ListOfDays({Key key, this.day, this.week}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -490,14 +318,21 @@ class ListOfDays extends StatelessWidget {
                 fontFamily: 'Comic Sans',
                 fontSize: 30.0,
                 fontWeight: FontWeight.bold),),
+          // back button
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
         body:
         // number of buttons
         ListView.builder(
-          itemCount: 5,
+          itemCount: 4,
           itemBuilder: (context, index) {
             // navigates to day buttons - home tab
-            return HomeDays(day: index + 1);
+            return HomeDays(day: index + 1, week: week);
           },
         ),
       ),
@@ -508,8 +343,9 @@ class ListOfDays extends StatelessWidget {
 // creates day buttons - home tab
 class HomeDays extends StatelessWidget {
   final int day;
+  final int week;
 
-  const HomeDays({Key key, this.day}) : super(key: key);
+  const HomeDays({Key key, this.day, this.week}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -524,38 +360,20 @@ class HomeDays extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             Column(
-              children: <Widget>[
-                // if this is true
-                (day <5) ?
-                // then do this
-                Material(
-                  // colors every other light/darker grey
-                    color: (day % 2 == 0) ? Colors.grey[200] : Colors.grey[300],
-                    child: ListTile(
-                      // title of buttons
-                        title: Text("Day $day",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: 'Comic Sans',
-                                fontSize: 30.0))
-                    )
-                ) // if not, do this
-                    :
-                Material(
-                  color:  Colors.blue[900],
-                  child: ListTile(
-                    // title of buttons
-                      title: Text("Go Back",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'Comic Sans',
-                              fontSize: 30.0,
-                              foreground: Paint()
-                                ..color = Colors.white))
-
-                  ),
-                )
-              ],
+                children: <Widget>[
+                  Material(
+                    // colors every other light/darker grey
+                      color: (day % 2 == 0) ? Colors.grey[200] : Colors.grey[300],
+                      child: ListTile(
+                        // title of buttons
+                          title: Text("Day $day",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontFamily: 'Comic Sans',
+                                  fontSize: 30.0))
+                      )
+                  )
+                ]
             ),
             Positioned(
                 left: 0.0,
@@ -563,7 +381,6 @@ class HomeDays extends StatelessWidget {
                 bottom: 0.0,
                 right: 0.0,
                 child:
-                (day <5) ?
                 // makes button clickable
                 Material(
                   type: MaterialType.transparency,
@@ -574,7 +391,7 @@ class HomeDays extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return new ExercisePage(day: day);
+                            return new ExercisePage(day: day, week: week);
                           },
                           fullscreenDialog: true,
                         ),
@@ -582,25 +399,6 @@ class HomeDays extends StatelessWidget {
                     },
                   ),
                 )
-                    :
-                Material(
-                  type: MaterialType.transparency,
-                  child: InkWell(
-                    onTap: () async {
-                      await Future.delayed(Duration(milliseconds: 200));
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => new HomeWeeks(),
-                          fullscreenDialog: true,
-                        ),
-                      );
-                    },
-                  ),
-                )
-
-
-
             ),
           ],
         ),
@@ -612,12 +410,15 @@ class HomeDays extends StatelessWidget {
 // page when clicked - home tab
 class ExercisePage extends StatelessWidget {
   final int day;
+  final int week;
 
-  const ExercisePage({Key key, this.day}) : super(key: key);
+
+  const ExercisePage({Key key, this.day, this.week}) : super(key: key);
 
 
 // day 1 week 1 workout
   _day1w1(){
+
     return Center(
         child: ListView(
             children: <Widget>[
@@ -1121,6 +922,932 @@ class ExercisePage extends StatelessWidget {
         )
     );
   }
+  // -------------week 4-------------------------------
+
+  // day 1 week 4, 5, 6 workout
+  _day1w4(){
+    return Center(
+        child: ListView(
+            children: <Widget>[
+              // lift 1
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Back Squat",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('3 x 8',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+              //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),
+              // lift 2
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Overhead Press/Jerk",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('5 x 3',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+              //input
+              Material(
+                  color: Colors.grey[300],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),
+              // lift 3
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Clean Pull from Hang",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('5 x 4',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+              //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),
+              // lift 4
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Clean Pops",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 x practice',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+              // lift 5
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Bear Crawl",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 sets of 1 minute',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+            ]
+        )
+    );
+  }
+
+  // day 2 week 4, 5, 6 workout
+  _day2w4(){
+    return Center(
+        child: ListView(
+            children: <Widget>[
+              // lift 1
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Thrusters",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('3 x 8',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+              //input
+              Material(
+                  color: Colors.grey[300],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ), // lift 2
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Hex Bar Deadlift",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 x 4',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+              //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),   // lift 3
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Bench Press",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('3 x 10',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),    //input
+              Material(
+                  color: Colors.grey[300],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),           // lift 4
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Choice Push",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('6 sets',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),            // lift 5
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Choice Core",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 sets',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+            ]
+        )
+    );
+  }
+
+  // day 3 week 4, 5, 6 workout
+  _day3w4(){
+    return Center(
+        child: ListView(
+            children: <Widget>[
+              // lift 1
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Clean and Press",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 sets Vol Max (at least 15)',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),    //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),       // lift 2
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Incline Bench",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 sets Vol Max (at least 15)',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),    //input
+              Material(
+                  color: Colors.grey[300],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),          // lift 3
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Goblet Squat",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 sets Vol Max (at least 15)',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),    //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),          // lift 4
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Push-Ups",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 sets Vol Max (at least 15)',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+            ]
+        )
+    );
+  }
+
+  // day 4 week 4, 5, 6 workout
+  _day4w4(){
+    return Center(
+        child: ListView(
+            children: <Widget>[
+              // lift 1
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Overhead Squat",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('3 x 8',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),          // lift 2
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Snatch Pull from Athletic",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 x 4',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[300],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),          // lift 3
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Reverse Lunge",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('3 x 10',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),          // lift 4
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("RDL",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 x 8',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),           // lift 5
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Choice Pulls",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('6 sets',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+            ]
+        )
+    );
+  }
+
+  // day 1 week 7, 8, 9, 10 workout
+  _day1w7(){
+    return Center(
+        child: ListView(
+            children: <Widget>[
+              // lift 1
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Back Squat and Overhead Press",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 x 3',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              )  ,        // lift 2
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Overhead Squat",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 x 5',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[300],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),           // lift 3
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Incline Bench Press",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 x 8',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),           // lift 4
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Choice Arms",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('6 sets',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),           // lift 5
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Planks",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 sets of 1 minute',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+            ]
+        )
+    );
+  }
+  // day 1 week 7, 8, 9, 10 workout
+  _day2w7(){
+    return Center(
+        child: ListView(
+            children: <Widget>[
+              // lift 1
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Clean High Pull from Hang",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 x 4',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),           // lift 2
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Power Snatch",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 x 4',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[300],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),           // lift 3
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Dumbbell Bench Press",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('3 x 12',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),          // lift 4
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Choice Pulls",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('6 sets',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),           // lift 5
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Choice Core",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 sets',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+            ]
+        )
+    );
+  }
+  // day 1 week 7, 8, 9, 10 workout
+  _day3w7(){
+    return Center(
+        child: ListView(
+            children: <Widget>[
+              // lift 1
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Hex Bar Deadlift",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 heavy sets, Vol Max (no more than 10)',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),          // lift 2
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Box Jumps",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 sets, Vol Max',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),          // lift 3
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Weighted Walking Lunge",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 sets for yardage',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),           // lift 4
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("4-Count Push-Ups",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 sets, Vol Max',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+            ]
+        )
+    );
+  }
+  // day 1 week 7, 8, 9, 10 workout
+  _day4w7(){
+    return Center(
+        child: ListView(
+            children: <Widget>[
+              // lift 1
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Snatch Pull from Hang",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 x 4',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),           // lift 2
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("RDL",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('4 x 8',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[300],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),          // lift 3
+              Card(color: Colors.grey[200],
+                child: ListTile(
+                  title: Text("Overhead Lunge",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('3 x 8 ea',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),   //input
+              Material(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    height: 25.0,
+                    width: double.infinity,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "  Enter Weight"
+                        )
+                    ),
+                  )
+              ),           // lift 4
+              Card(color: Colors.grey[300],
+                child: ListTile(
+                  title: Text("Choice Push",
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                      )),
+                  subtitle: Text('6 sets',
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans',
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic)),
+                ),
+              ),
+            ]
+        )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1166,20 +1893,147 @@ class ExercisePage extends StatelessWidget {
                 ),
               ),
               // which workout is displayed
-              if (day ==1)
+              // ------- week 1
+              if (week == 1 && day ==1)
                 Expanded(
                   child: Center(
                       child: _day1w1()),
-                ), if (day ==2) Expanded(
+                ), if (week == 1 && day ==2) Expanded(
                 child: Center(
                     child: _day2w1()),
-              ), if (day ==3) Expanded(
+              ), if (week == 1 && day ==3) Expanded(
                 child: Center(
                     child: _day3w1()),
-              ),  if (day ==4) Expanded(
+              ),  if (week == 1 && day ==4) Expanded(
                 child: Center(
                     child: _day4w1()),
-              ),
+              ),  // ----------- week 2
+              if (week == 2 && day ==1)
+                Expanded(
+                  child: Center(
+                      child: _day1w1()),
+                ), if (week == 2 && day ==2) Expanded(
+                child: Center(
+                    child: _day2w1()),
+              ), if (week == 2 && day ==3) Expanded(
+                child: Center(
+                    child: _day3w1()),
+              ),  if (week == 2 && day ==4) Expanded(
+                child: Center(
+                    child: _day4w1()),
+              ),  // --------- week 3
+              if (week == 3 && day ==1)
+                Expanded(
+                  child: Center(
+                      child: _day1w1()),
+                ), if (week == 3 && day ==2) Expanded(
+                child: Center(
+                    child: _day2w1()),
+              ), if (week == 3 && day ==3) Expanded(
+                child: Center(
+                    child: _day3w1()),
+              ),  if (week == 3 && day ==4) Expanded(
+                child: Center(
+                    child: _day4w1()),
+              ), // ---------- week 4
+              if (week == 4 && day ==1)
+                Expanded(
+                  child: Center(
+                      child: _day1w4()),
+                ), if (week == 4 && day ==2) Expanded(
+                child: Center(
+                    child: _day2w4()),
+              ), if (week == 4 && day ==3) Expanded(
+                child: Center(
+                    child: _day3w4()),
+              ),  if (week == 4 && day ==4) Expanded(
+                child: Center(
+                    child: _day4w4()),
+              ),  // -----------  week 5
+              if (week == 5 && day ==1)
+                Expanded(
+                  child: Center(
+                      child: _day1w4()),
+                ), if (week == 5 && day ==2) Expanded(
+                child: Center(
+                    child: _day2w4()),
+              ), if (week == 5 && day ==3) Expanded(
+                child: Center(
+                    child: _day3w4()),
+              ),  if (week == 5 && day ==4) Expanded(
+                child: Center(
+                    child: _day4w4()),
+              ),   // ----------- week 6
+              if (week == 6 && day ==1)
+                Expanded(
+                  child: Center(
+                      child: _day1w4()),
+                ), if (week == 6 && day ==2) Expanded(
+                child: Center(
+                    child: _day2w4()),
+              ), if (week == 6 && day ==3) Expanded(
+                child: Center(
+                    child: _day3w4()),
+              ),  if (week == 6 && day ==4) Expanded(
+                child: Center(
+                    child: _day4w4()),
+              ),   // ----------- week 7
+              if (week == 7 && day ==1)
+                Expanded(
+                  child: Center(
+                      child: _day1w7()),
+                ), if (week == 7 && day ==2) Expanded(
+                child: Center(
+                    child: _day2w7()),
+              ), if (week == 7 && day ==3) Expanded(
+                child: Center(
+                    child: _day3w7()),
+              ),  if (week == 7 && day ==4) Expanded(
+                child: Center(
+                    child: _day4w7()),
+              ),   // ----------- week 8
+              if (week == 8 && day ==1)
+                Expanded(
+                  child: Center(
+                      child: _day1w7()),
+                ), if (week == 8 && day ==2) Expanded(
+                child: Center(
+                    child: _day2w7()),
+              ), if (week == 8 && day ==3) Expanded(
+                child: Center(
+                    child: _day3w7()),
+              ),  if (week == 8 && day ==4) Expanded(
+                child: Center(
+                    child: _day4w7()),
+              ),   // ----------- week 9
+              if (week == 9 && day ==1)
+                Expanded(
+                  child: Center(
+                      child: _day1w7()),
+                ), if (week == 9 && day ==2) Expanded(
+                child: Center(
+                    child: _day2w7()),
+              ), if (week == 9 && day ==3) Expanded(
+                child: Center(
+                    child: _day3w7()),
+              ),  if (week == 9 && day ==4) Expanded(
+                child: Center(
+                    child: _day4w7()),
+              ),   // ----------- week 10
+              if (week == 10 && day ==1)
+                Expanded(
+                  child: Center(
+                      child: _day1w7()),
+                ), if (week == 10 && day ==2) Expanded(
+                child: Center(
+                    child: _day2w7()),
+              ), if (week == 10 && day ==3) Expanded(
+                child: Center(
+                    child: _day3w7()),
+              ),  if (week == 10 && day ==4) Expanded(
+                child: Center(
+                    child: _day4w7()),
+              )
             ],
           ),
         ),
