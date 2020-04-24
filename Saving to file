@@ -1,0 +1,25 @@
+Use the same main.dart file that we had in saving to shared preferences, but replace the _read() and _save() methods with the code below.
+
+      _read() async {
+        try {
+          final directory = await getApplicationDocumentsDirectory();
+          final file = File('${directory.path}/my_file.txt');
+          String text = await file.readAsString();
+          print(text);
+        } catch (e) {
+          print("Couldn't read file");
+        }
+      }
+
+      _save() async {
+        final directory = await getApplicationDocumentsDirectory();
+        final file = File('${directory.path}/my_file.txt');
+        final text = 'Hello World!';
+        await file.writeAsString(text);
+        print('saved');
+      }
+      
+ You will have to add the following two imports:
+
+    import 'dart:io';
+    import 'package:path_provider/path_provider.dart';
