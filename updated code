@@ -1862,18 +1862,19 @@ class ExercisePage extends StatelessWidget {
                 color: Colors.blueGrey[900],
                 child: ListTile(
                   // title on top of page
-                  title: Text("Day $day",
+                  title: Padding(child: Text("Day $day",
                       style: TextStyle(
                           fontSize: 18.0,
                           foreground: Paint()
                             ..color = Colors.white)
-                  ),
-                  subtitle: Text("Exercises",
+                  ), padding: EdgeInsets.only(left: 35.0)),
+                  subtitle: Padding(child: Text("Exercises",
                       style: TextStyle(
                           foreground: Paint()
                             ..color = Colors.white)),
+                  padding: EdgeInsets.only(left: 35.0)),
                 ),
-              ),
+              ), 
               // which workout is displayed
               // ------- week 1
               if (week == 1 && day ==1)
