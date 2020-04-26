@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 void main() => runApp(MyApp());
@@ -345,6 +346,8 @@ class HomeDays extends StatelessWidget {
   final int day;
   final int week;
 
+
+
   const HomeDays({Key key, this.day, this.week}) : super(key: key);
 
   @override
@@ -408,17 +411,42 @@ class HomeDays extends StatelessWidget {
 }
 
 // page when clicked - home tab
-class ExercisePage extends StatelessWidget {
+class ExercisePage extends StatefulWidget {
   final int day;
   final int week;
 
 
-  const ExercisePage({Key key, this.day, this.week}) : super(key: key);
+  ExercisePage({Key key, this.day, this.week}) : super(key: key);
+
+  @override
+  _ExercisePageState createState() => _ExercisePageState();
+}
+
+class _ExercisePageState extends State<ExercisePage> {
+  TextEditingController myController = TextEditingController();
+  String weight;
+
+  Future<Null> storeName(String newWeight) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("weight", newWeight);
+  }
+
+  Future<Null> getSharedPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    weight = prefs.getString("weight");
+    setState(() {
+      myController = new TextEditingController(text: weight);
+    });
+  }
+  @override
+  void initState() {
+    super.initState();
+    weight = "";
+    getSharedPrefs();
+  }
 
 
-// day 1 week 1 workout
   _day1w1(){
-
     return Center(
         child: ListView(
             children: <Widget>[
@@ -445,10 +473,17 @@ class ExercisePage extends StatelessWidget {
                   child: SizedBox(
                     height: 25.0,
                     width: double.infinity,
-                    child: TextFormField(
-                        decoration: InputDecoration(
-                            labelText: "  Enter Weight"
-                        )
+                    child: TextField(
+                      decoration: new InputDecoration(
+                        hintText: "Enter Weight",
+                      ),
+                      onChanged: (String str) {
+                        setState(() {
+                          weight = str;
+                          storeName(str);
+                        });
+                      },
+                      controller: myController,
                     ),
                   )
               ),
@@ -551,7 +586,6 @@ class ExercisePage extends StatelessWidget {
     );
   }
 
-  // day 2 week 1 workout
   _day2w1(){
     return Center(
         child: ListView(
@@ -680,7 +714,6 @@ class ExercisePage extends StatelessWidget {
     );
   }
 
-  // day 3 week 1 workout
   _day3w1(){
     return Center(
         child: ListView(
@@ -792,7 +825,6 @@ class ExercisePage extends StatelessWidget {
     );
   }
 
-  // day 4 week 1 workout
   _day4w1(){
     return Center(
         child: ListView(
@@ -922,9 +954,7 @@ class ExercisePage extends StatelessWidget {
         )
     );
   }
-  // -------------week 4-------------------------------
 
-  // day 1 week 4, 5, 6 workout
   _day1w4(){
     return Center(
         child: ListView(
@@ -1053,7 +1083,6 @@ class ExercisePage extends StatelessWidget {
     );
   }
 
-  // day 2 week 4, 5, 6 workout
   _day2w4(){
     return Center(
         child: ListView(
@@ -1177,7 +1206,6 @@ class ExercisePage extends StatelessWidget {
     );
   }
 
-  // day 3 week 4, 5, 6 workout
   _day3w4(){
     return Center(
         child: ListView(
@@ -1284,7 +1312,6 @@ class ExercisePage extends StatelessWidget {
     );
   }
 
-  // day 4 week 4, 5, 6 workout
   _day4w4(){
     return Center(
         child: ListView(
@@ -1406,7 +1433,6 @@ class ExercisePage extends StatelessWidget {
     );
   }
 
-  // day 1 week 7, 8, 9, 10 workout
   _day1w7(){
     return Center(
         child: ListView(
@@ -1527,7 +1553,7 @@ class ExercisePage extends StatelessWidget {
         )
     );
   }
-  // day 1 week 7, 8, 9, 10 workout
+
   _day2w7(){
     return Center(
         child: ListView(
@@ -1648,7 +1674,7 @@ class ExercisePage extends StatelessWidget {
         )
     );
   }
-  // day 1 week 7, 8, 9, 10 workout
+
   _day3w7(){
     return Center(
         child: ListView(
@@ -1742,7 +1768,7 @@ class ExercisePage extends StatelessWidget {
         )
     );
   }
-  // day 1 week 7, 8, 9, 10 workout
+
   _day4w7(){
     return Center(
         child: ListView(
@@ -1872,7 +1898,7 @@ class ExercisePage extends StatelessWidget {
 
     return Stack(children: <Widget>[
       Hero(
-        tag: "card$day",
+        tag: "card${widget.day}",
         child: Material(
           child: Column(
             children: <Widget>[
@@ -1880,7 +1906,7 @@ class ExercisePage extends StatelessWidget {
                 color: Colors.blueGrey[900],
                 child: ListTile(
                   // title on top of page
-                  title: Text("Day $day",
+                  title: Text("Day ${widget.day}",
                       style: TextStyle(
                           fontSize: 18.0,
                           foreground: Paint()
@@ -1894,143 +1920,143 @@ class ExercisePage extends StatelessWidget {
               ),
               // which workout is displayed
               // ------- week 1
-              if (week == 1 && day ==1)
+              if (widget.week == 1 && widget.day ==1)
                 Expanded(
                   child: Center(
                       child: _day1w1()),
-                ), if (week == 1 && day ==2) Expanded(
+                ), if (widget.week == 1 && widget.day ==2) Expanded(
                 child: Center(
                     child: _day2w1()),
-              ), if (week == 1 && day ==3) Expanded(
+              ), if (widget.week == 1 && widget.day ==3) Expanded(
                 child: Center(
                     child: _day3w1()),
-              ),  if (week == 1 && day ==4) Expanded(
+              ),  if (widget.week == 1 && widget.day ==4) Expanded(
                 child: Center(
                     child: _day4w1()),
               ),  // ----------- week 2
-              if (week == 2 && day ==1)
+              if (widget.week == 2 && widget.day ==1)
                 Expanded(
                   child: Center(
                       child: _day1w1()),
-                ), if (week == 2 && day ==2) Expanded(
+                ), if (widget.week == 2 && widget.day ==2) Expanded(
                 child: Center(
                     child: _day2w1()),
-              ), if (week == 2 && day ==3) Expanded(
+              ), if (widget.week == 2 && widget.day ==3) Expanded(
                 child: Center(
                     child: _day3w1()),
-              ),  if (week == 2 && day ==4) Expanded(
+              ),  if (widget.week == 2 && widget.day ==4) Expanded(
                 child: Center(
                     child: _day4w1()),
               ),  // --------- week 3
-              if (week == 3 && day ==1)
+              if (widget.week == 3 && widget.day ==1)
                 Expanded(
                   child: Center(
                       child: _day1w1()),
-                ), if (week == 3 && day ==2) Expanded(
+                ), if (widget.week == 3 && widget.day ==2) Expanded(
                 child: Center(
                     child: _day2w1()),
-              ), if (week == 3 && day ==3) Expanded(
+              ), if (widget.week == 3 && widget.day ==3) Expanded(
                 child: Center(
                     child: _day3w1()),
-              ),  if (week == 3 && day ==4) Expanded(
+              ),  if (widget.week == 3 && widget.day ==4) Expanded(
                 child: Center(
                     child: _day4w1()),
               ), // ---------- week 4
-              if (week == 4 && day ==1)
+              if (widget.week == 4 && widget.day ==1)
                 Expanded(
                   child: Center(
                       child: _day1w4()),
-                ), if (week == 4 && day ==2) Expanded(
+                ), if (widget.week == 4 && widget.day ==2) Expanded(
                 child: Center(
                     child: _day2w4()),
-              ), if (week == 4 && day ==3) Expanded(
+              ), if (widget.week == 4 && widget.day ==3) Expanded(
                 child: Center(
                     child: _day3w4()),
-              ),  if (week == 4 && day ==4) Expanded(
+              ),  if (widget.week == 4 && widget.day ==4) Expanded(
                 child: Center(
                     child: _day4w4()),
               ),  // -----------  week 5
-              if (week == 5 && day ==1)
+              if (widget.week == 5 && widget.day ==1)
                 Expanded(
                   child: Center(
                       child: _day1w4()),
-                ), if (week == 5 && day ==2) Expanded(
+                ), if (widget.week == 5 && widget.day ==2) Expanded(
                 child: Center(
                     child: _day2w4()),
-              ), if (week == 5 && day ==3) Expanded(
+              ), if (widget.week == 5 && widget.day ==3) Expanded(
                 child: Center(
                     child: _day3w4()),
-              ),  if (week == 5 && day ==4) Expanded(
+              ),  if (widget.week == 5 && widget.day ==4) Expanded(
                 child: Center(
                     child: _day4w4()),
               ),   // ----------- week 6
-              if (week == 6 && day ==1)
+              if (widget.week == 6 && widget.day ==1)
                 Expanded(
                   child: Center(
                       child: _day1w4()),
-                ), if (week == 6 && day ==2) Expanded(
+                ), if (widget.week == 6 && widget.day ==2) Expanded(
                 child: Center(
                     child: _day2w4()),
-              ), if (week == 6 && day ==3) Expanded(
+              ), if (widget.week == 6 && widget.day ==3) Expanded(
                 child: Center(
                     child: _day3w4()),
-              ),  if (week == 6 && day ==4) Expanded(
+              ),  if (widget.week == 6 && widget.day ==4) Expanded(
                 child: Center(
                     child: _day4w4()),
               ),   // ----------- week 7
-              if (week == 7 && day ==1)
+              if (widget.week == 7 && widget.day ==1)
                 Expanded(
                   child: Center(
                       child: _day1w7()),
-                ), if (week == 7 && day ==2) Expanded(
+                ), if (widget.week == 7 && widget.day ==2) Expanded(
                 child: Center(
                     child: _day2w7()),
-              ), if (week == 7 && day ==3) Expanded(
+              ), if (widget.week == 7 && widget.day ==3) Expanded(
                 child: Center(
                     child: _day3w7()),
-              ),  if (week == 7 && day ==4) Expanded(
+              ),  if (widget.week == 7 && widget.day ==4) Expanded(
                 child: Center(
                     child: _day4w7()),
               ),   // ----------- week 8
-              if (week == 8 && day ==1)
+              if (widget.week == 8 && widget.day ==1)
                 Expanded(
                   child: Center(
                       child: _day1w7()),
-                ), if (week == 8 && day ==2) Expanded(
+                ), if (widget.week == 8 && widget.day ==2) Expanded(
                 child: Center(
                     child: _day2w7()),
-              ), if (week == 8 && day ==3) Expanded(
+              ), if (widget.week == 8 && widget.day ==3) Expanded(
                 child: Center(
                     child: _day3w7()),
-              ),  if (week == 8 && day ==4) Expanded(
+              ),  if (widget.week == 8 && widget.day ==4) Expanded(
                 child: Center(
                     child: _day4w7()),
               ),   // ----------- week 9
-              if (week == 9 && day ==1)
+              if (widget.week == 9 && widget.day ==1)
                 Expanded(
                   child: Center(
                       child: _day1w7()),
-                ), if (week == 9 && day ==2) Expanded(
+                ), if (widget.week == 9 && widget.day ==2) Expanded(
                 child: Center(
                     child: _day2w7()),
-              ), if (week == 9 && day ==3) Expanded(
+              ), if (widget.week == 9 && widget.day ==3) Expanded(
                 child: Center(
                     child: _day3w7()),
-              ),  if (week == 9 && day ==4) Expanded(
+              ),  if (widget.week == 9 && widget.day ==4) Expanded(
                 child: Center(
                     child: _day4w7()),
               ),   // ----------- week 10
-              if (week == 10 && day ==1)
+              if (widget.week == 10 && widget.day ==1)
                 Expanded(
                   child: Center(
                       child: _day1w7()),
-                ), if (week == 10 && day ==2) Expanded(
+                ), if (widget.week == 10 && widget.day ==2) Expanded(
                 child: Center(
                     child: _day2w7()),
-              ), if (week == 10 && day ==3) Expanded(
+              ), if (widget.week == 10 && widget.day ==3) Expanded(
                 child: Center(
                     child: _day3w7()),
-              ),  if (week == 10 && day ==4) Expanded(
+              ),  if (widget.week == 10 && widget.day ==4) Expanded(
                 child: Center(
                     child: _day4w7()),
               )
