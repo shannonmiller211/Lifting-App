@@ -1,0 +1,287 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:flutter/cupertino.dart';
+
+import 'package:flutter/material.dart';
+
+
+
+import '../database.dart';
+
+
+
+class InputHome extends StatefulWidget {
+
+  InputHome({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+
+  _InputHomeState createState() => _InputHomeState();
+
+}
+
+
+
+class _InputHomeState extends State<InputHome> {
+
+  TextStyle style = TextStyle(fontSize: 20.0, color: Colors.black);
+
+  final nameController = TextEditingController();
+
+  final weekController = TextEditingController();
+
+  final weightsController = TextEditingController();
+
+  final dbHelper = DatabaseHelper.instance;
+
+  @override
+
+  void dispose() {
+
+    // Clean up the controller when the widget is disposed.
+
+    nameController.dispose();
+
+    WeekController.dispose();
+
+    WeightController.dispose();
+
+    super.dispose();
+
+  }
+
+//This widget sets up the layout for the user
+
+  @override
+
+  Widget build(BuildContext context) {
+
+      //the name input box
+
+    final nameField = TextFormField (
+
+      controller: nameController,
+
+      obscureText: false,
+
+      style: style,
+
+      decoration: InputDecoration(
+
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
+          hintText: "Name", hintStyle: TextStyle(fontSize: 15, color: Colors.white),
+
+          border:
+
+          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+
+    );
+
+    //the week input box
+
+    final weekField = TextFormField (
+
+      controller: weekController,
+
+      obscureText: false,
+
+      style: style,
+
+      decoration: InputDecoration(
+
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
+          hintText: "Week", hintStyle: TextStyle(fontSize: 15, color: Colors.black),
+
+          border:
+
+          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+
+    );
+
+    //the amount of weight the user lifted
+
+    final weightField = TextFormField (
+
+      controller: weightController,
+
+      obscureText: false,
+
+      style: style,
+
+      decoration: InputDecoration(
+
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
+          hintText: "Weight", hintStyle: TextStyle(fontSize: 15, color: Colors.black),
+
+          border:
+
+          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+
+    );
+
+
+
+    //this is the submit button that pushes these inputs into the database
+
+    final submitButton = Material(
+
+      elevation: 5.0,
+
+      borderRadius: BorderRadius.circular(30.0),
+
+      color: Color(0xff01A0C7),
+
+      child: MaterialButton(
+
+        minWidth: MediaQuery.of(context).size.width,
+
+        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
+        onPressed: () {addWeek();
+
+        },
+
+        child: Text("Submit",
+
+            textAlign: TextAlign.center,
+
+            style: style.copyWith(
+
+                color: Colors.white, fontWeight: FontWeight.bold)),
+
+      ),
+
+    );
+
+    //the next bit of code refers to the title above the input boxes and
+
+    
+
+    return Scaffold(
+
+      body: Center(
+
+        child: Container(
+
+          color: Colors.green,
+
+          child: Padding(
+
+            padding: const EdgeInsets.all(70.0),
+
+            child: Column(
+
+              crossAxisAlignment: CrossAxisAlignment.center,
+
+              mainAxisAlignment: MainAxisAlignment.center,
+
+              children: <Widget>[
+
+                Expanded(
+
+                  child: Container(
+
+                      height: 10,
+
+                      child: Text('',
+
+                          style: TextStyle(color: Colors.black,
+
+                              fontWeight: FontWeight.w800,
+
+                              fontSize: 26, fontStyle: FontStyle.bold))),
+
+                ),
+
+                Expanded(
+
+                  child: Container(
+
+                    height: 155.0,
+
+                    decoration: BoxDecoration(border: Border.all(color: Colors.green)),
+
+                    child: Image.asset(
+
+                      "Assets/logo.png",
+
+                      fit: BoxFit.contain,
+
+                    ),
+
+                  ),
+
+                ),
+
+                SizedBox(height: 45.0),
+
+                nameField,
+
+                SizedBox(height: 45.0),
+
+                weekField,
+
+                SizedBox(height: 45.0),
+
+                WeightsField,
+
+                SizedBox(
+
+                  height: 35.0,
+
+                ),
+
+                submitButton,
+
+                SizedBox(
+
+                  height: 15.0,
+
+                ),
+
+              ],
+
+            ),
+
+          ),
+
+        ),
+
+      ),
+
+    );
+
+  }
+
+  //this pushes the information to the database
+
+  final db = Firestore.instance;
+
+  Future < void > addWeek() async {
+
+    await db.collection("users").add({
+
+      'name': nameController.text,
+
+      'hole': int.parse(WeekController.text),
+
+      'strokes': int.parse(WeightController.text),
+
+    }).then((documentReference) {
+
+      print(documentReference.documentID);
+
+    }).catchError((e) {
+
+      print(e);
+
+    });
+
+  }
+
+}
