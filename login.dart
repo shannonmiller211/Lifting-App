@@ -94,14 +94,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
                         );
 
                       }
-                      else {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyHomePage()
-                            )
-                        );
-                      }
                       setState(() {
                         showProgress = false;
                       });
