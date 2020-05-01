@@ -15,9 +15,8 @@ class MyApp extends StatelessWidget {
       home: WholeApp(),
     );
   }
-
-//hi() {}
 }
+
 class WholeApp extends StatelessWidget {
 
   // This widget is the root of your application.
